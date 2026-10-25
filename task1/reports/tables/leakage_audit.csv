@@ -1,0 +1,10 @@
+check,status,detail
+split gaps,ok,"train_end=127580801, val_start=128185601, test_start=129395201, gap=604800"
+snapshot windows,ok,"train_w0:126976001..127580801, train_w1:126371201..126976001, train_w2:125766401..126371201, train_w3:125161601..125766401, val:128185601..128790401, test:129395201..130000001"
+val: positives == events in label window,ok,"2765 positives, all present in events: True"
+val: no negative/positive duplicates,ok,"rows=4391894, duplicate pairs=0"
+test: positives == events in label window,ok,"2932 positives, all present in events: True"
+test: no negative/positive duplicates,ok,"rows=5046459, duplicate pairs=0"
+feature = SQL with ts < cutoff,ok,"300 users, exact match 100%"
+future events would change the feature,ok,300/300 users differ if label window is included
+dataset fingerprints,ok,"expected 48236015_100..., got ['48236015_100', '48236015_100', '48236015_100']"

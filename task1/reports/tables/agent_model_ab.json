@@ -1,0 +1,50 @@
+{
+  "sample_users": 1000,
+  "quota_per_entity": 20,
+  "table": [
+    {
+      "pool": "quota",
+      "n_specs": 57,
+      "n_in_quota": 5,
+      "share_in_quota": 0.088,
+      "median_user_auc": 0.6747,
+      "max_user_auc": 0.8252,
+      "best_entity_rank": 1,
+      "n_entities": 4,
+      "n_windows": 6,
+      "cost_usd": 0.021312,
+      "seconds": 215.4
+    },
+    {
+      "pool": "ab_deepseek",
+      "n_specs": 17,
+      "n_in_quota": 0,
+      "share_in_quota": 0.0,
+      "median_user_auc": 0.6609,
+      "max_user_auc": 0.7272,
+      "best_entity_rank": 41,
+      "n_entities": 4,
+      "n_windows": 5,
+      "cost_usd": 0.015787,
+      "seconds": 113.4
+    },
+    {
+      "pool": "ab_kimi",
+      "n_specs": 60,
+      "n_in_quota": 8,
+      "share_in_quota": 0.133,
+      "median_user_auc": 0.5906,
+      "max_user_auc": 0.7015,
+      "best_entity_rank": 1,
+      "n_entities": 4,
+      "n_windows": 4,
+      "cost_usd": 0.028032,
+      "seconds": 210.6
+    }
+  ],
+  "jaccard": {
+    "quota|ab_deepseek": 0.072,
+    "quota|ab_kimi": 0.158,
+    "ab_deepseek|ab_kimi": 0.085
+  }
+}

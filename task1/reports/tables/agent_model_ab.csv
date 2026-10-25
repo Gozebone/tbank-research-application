@@ -1,0 +1,4 @@
+pool,n_specs,n_in_quota,share_in_quota,median_user_auc,max_user_auc,best_entity_rank,n_entities,n_windows,cost_usd,seconds
+quota,57,5,0.088,0.6747,0.8252,1,4,6,0.021312,215.4
+ab_deepseek,17,0,0.0,0.6609,0.7272,41,4,5,0.015787,113.4
+ab_kimi,60,8,0.133,0.5906,0.7015,1,4,4,0.028032,210.6

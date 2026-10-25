@@ -1,0 +1,53 @@
+{
+  "k": 10,
+  "bootstrap": 2000,
+  "seed": 42,
+  "ndcg": {
+    "baseline": 0.9147,
+    "quota_union": 0.9185,
+    "expr_union": 0.9187,
+    "tuned_union": 0.9196
+  },
+  "comparisons": [
+    {
+      "comparison": "quota_union - baseline",
+      "delta": 0.003769091246536904,
+      "ci_low": 0.002517583966224471,
+      "ci_high": 0.005054255207347816,
+      "p_not_positive": 0.0,
+      "n_users": 5547
+    },
+    {
+      "comparison": "expr_union - baseline",
+      "delta": 0.0040056518450301,
+      "ci_low": 0.0027444311869953856,
+      "ci_high": 0.005285842362253816,
+      "p_not_positive": 0.0,
+      "n_users": 5547
+    },
+    {
+      "comparison": "expr_union - quota_union",
+      "delta": 0.00023656059849319622,
+      "ci_low": -0.0005957291662199466,
+      "ci_high": 0.0010778912829231626,
+      "p_not_positive": 0.2635,
+      "n_users": 5547
+    },
+    {
+      "comparison": "tuned_union - baseline",
+      "delta": 0.004809238907127811,
+      "ci_low": 0.0035658970278586418,
+      "ci_high": 0.006065667041222236,
+      "p_not_positive": 0.0,
+      "n_users": 5547
+    },
+    {
+      "comparison": "tuned_union - quota_union",
+      "delta": 0.0010401476605909066,
+      "ci_low": 0.00022561013208193537,
+      "ci_high": 0.0019114854130715309,
+      "p_not_positive": 0.005,
+      "n_users": 5547
+    }
+  ]
+}

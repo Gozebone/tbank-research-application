@@ -1,0 +1,44 @@
+{
+  "metrics": [
+    {
+      "approach": "baseline",
+      "n_features": 99,
+      "test_ndcg@10": 0.5194,
+      "test_roc_auc": 0.8548,
+      "test_recall@10": 0.5908
+    },
+    {
+      "approach": "transfer_grid",
+      "n_features": 201,
+      "test_ndcg@10": 0.5201,
+      "test_roc_auc": 0.8552,
+      "test_recall@10": 0.5897
+    },
+    {
+      "approach": "transfer_expr",
+      "n_features": 223,
+      "test_ndcg@10": 0.5201,
+      "test_roc_auc": 0.8552,
+      "test_recall@10": 0.5906
+    }
+  ],
+  "significance": [
+    {
+      "comparison": "transfer_grid - baseline",
+      "delta": 0.0006991589745041216,
+      "ci_low": -0.0015409929299242786,
+      "ci_high": 0.003061422871283575,
+      "p_not_positive": 0.283,
+      "n_users": 4833
+    },
+    {
+      "comparison": "transfer_expr - baseline",
+      "delta": 0.0006945820405085401,
+      "ci_low": -0.0016434285366690865,
+      "ci_high": 0.0029949756020204764,
+      "p_not_positive": 0.2815,
+      "n_users": 4833
+    }
+  ],
+  "n_users": 4833
+}

@@ -1,0 +1,31 @@
+{
+  "agent_tag": "quota",
+  "train_tag": "agent_quota",
+  "model": "openrouter/qwen/qwen3.8-omni-flash",
+  "n_proposed_to_pool": 57,
+  "n_new_vs_grid": 57,
+  "n_new_vs_screen": 57,
+  "n_selected_in_final": 4,
+  "n_selected_in_additive": 20,
+  "n_extra_specs_added_to_screen": 57,
+  "n_selected_from_extra": 4,
+  "agent_stats": {
+    "n_iterations": 8,
+    "n_propose_calls": 8,
+    "n_llm_calls": 10,
+    "prompt_tokens": 105945,
+    "completion_tokens": 11533,
+    "cost_usd": 0.021312,
+    "seconds": 215.4,
+    "finish_reason": "finished",
+    "n_pool": 57
+  },
+  "selected_features": [
+    "item__sum_played__listen__10d",
+    "item__count__any__21d",
+    "item__count__listen__5d",
+    "item__nunique_users__listen__5d"
+  ],
+  "agent_summary": "Итог: 57 принятых признаков, все слоты (entity×metric) заполнены до капа 3. Стратегия — недокрытые сеткой комбинации: окна 5/10/21/45/120/150 дней, события like/any, played_ratio-метрики и nunique_items на косвенных сущностях.\n\nНа сильнее всего внутри пользователя:\n- user_artist: mean_played/sum_played/nunique_items__120d (0.837–0.842), organic_count__120d (0.716) — долгий горизонт артиста даёт почти сетковый уровень, но с nan_rate 0 и другой механикой (широта исследования артиста, а не только объём).\n- user_album: mean_played/sum_played__120d, nunique_items__120d (0.788–0.790) — «альбомная глубина»; ключевой пробел сетки, где album-признаки жили только в all-time.\n- user_item: sum_played/max_played/mean_played__120d (0.748–0.762) — пиковая и средняя дозапросность конкретного трека; короткие окна (10/21d) слабые (0.58–0.65) и почти полностью NaN.\n- item (глобальные приоры): count/nunique_users/sum_played/organic_count на 5/21/45d (0.67–0.69) — сглаженная популярность без шумов 1d и устарелости 30d+.\n\nНе сработало / выводы:\n- user-сущность исключена намеренно: два проба (nunique_items__10d = 0.5000, и аналогичные) подтвердили, что user-level агрегаты константны внутри списка кандидатов и не влияют на within-user ranking.\n- item__mean_played__45d (0.5032) — средняя дозапросность трека сама по себе не разделяет кандидатов внутри пользователя (популярность и качество перемешаны); полезнее max_played и sum_played на item.\n- like-событие слабо: user_item__count__like__45d (0.520), user_artist__count__like__120d (0.559) — приняты, но дают лишь тонкий явный-сигнал поверх прослушиваний.\n- item__mean_track_len (0.445–0.455) — принят как обратный признак: более длинные треки реже переслушиваются за неделю; это стабильное внутреннее свойство объекта, комплементарное популярности.\n- Повторные окна одного механизма (например, user_album 10d vs 21d) почти идентичны по AUC — дальнейшее дробление сетки бессмысленно, упор стоит делать на 120d-горизонты и played_ratio-метрики.",
+  "screen_seconds": 327.8603522670019
+}

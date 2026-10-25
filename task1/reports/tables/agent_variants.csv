@@ -1,0 +1,10 @@
+tag,variant,n_features,val_ndcg@10,val_roc_auc,test_ndcg@10
+quota,auto_base,57,0.7752,0.9402,
+quota,auto_rel,104,0.8956,0.9641,
+quota,manual_plus_auto,203,0.919,0.9734,0.9185
+agent_quota,auto_base,56,0.7647,0.9365,
+agent_quota,auto_rel,102,0.8822,0.9601,
+agent_quota,manual_plus_auto,201,0.9179,0.9732,0.9191
+agent_add,auto_base,74,0.7885,0.9409,
+agent_add,auto_rel,122,0.8946,0.9641,
+agent_add,manual_plus_auto,221,0.9186,0.9734,0.9192

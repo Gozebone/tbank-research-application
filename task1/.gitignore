@@ -1,0 +1,29 @@
+# data: raw/interim/processed are reproducible and too large for git
+data/raw/
+data/interim/
+data/processed/
+data/**/raw/
+data/**/interim/
+data/**/processed/
+*.parquet
+*.zip
+*.csv
+!reports/tables/*.csv
+
+# environment
+.venv/
+.env
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+*.egg-info/
+
+# experiments & generated artifacts
+experiments/*
+!experiments/.gitkeep
+experiments_holdout/
+experiments_kion/
+
+# logs
+*.log

@@ -1,0 +1,53 @@
+{
+  "sample_users": 1000,
+  "quota_per_entity": 20,
+  "table": [
+    {
+      "pool": "expr_qwen",
+      "kind": "expr",
+      "n_specs": 80,
+      "n_in_quota": 29,
+      "share_in_quota": 0.362,
+      "median_user_auc": 0.725,
+      "max_user_auc": 0.8832,
+      "best_entity_rank": 1,
+      "n_entities": 5,
+      "n_ops": 4,
+      "cost_usd": 0.050998,
+      "seconds": 345.8
+    },
+    {
+      "pool": "expr_deepseek",
+      "kind": "expr",
+      "n_specs": 39,
+      "n_in_quota": 4,
+      "share_in_quota": 0.103,
+      "median_user_auc": 0.5904,
+      "max_user_auc": 0.784,
+      "best_entity_rank": 1,
+      "n_entities": 4,
+      "n_ops": 3,
+      "cost_usd": 0.041089,
+      "seconds": 285.3
+    },
+    {
+      "pool": "expr_kimi",
+      "kind": "expr",
+      "n_specs": 70,
+      "n_in_quota": 20,
+      "share_in_quota": 0.286,
+      "median_user_auc": 0.6338,
+      "max_user_auc": 0.8081,
+      "best_entity_rank": 1,
+      "n_entities": 4,
+      "n_ops": 3,
+      "cost_usd": 0.039896,
+      "seconds": 273.6
+    }
+  ],
+  "jaccard": {
+    "expr_qwen|expr_deepseek": 0.035,
+    "expr_qwen|expr_kimi": 0.056,
+    "expr_deepseek|expr_kimi": 0.058
+  }
+}

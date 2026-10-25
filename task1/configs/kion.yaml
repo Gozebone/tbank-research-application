@@ -1,0 +1,85 @@
+# Проверка на другом датасете: KION (MTS).
+# 10k пользователей с >=20 просмотрами, вся история; отдельные пути.
+
+project:
+  name: recsys-auto-features-kion
+  seed: 42
+paths:
+  raw: data/raw
+  interim: data/kion/interim
+  processed: data/kion/processed
+  experiments: experiments_kion
+  reports: reports_kion
+data:
+  dataset: kion
+  yambda:
+    size: 500m
+    raw_file: data/raw/yambda/flat/500m/multi_event.parquet
+    artist_map: data/raw/yambda/artist_item_mapping.parquet
+    album_map: data/raw/yambda/album_item_mapping.parquet
+    n_users: 10000
+    min_user_events: 20
+  kion:
+    raw_dir: data/raw/kion
+    n_users: 10000
+    min_user_events: 20
+prepare:
+  events_file: data/kion/interim/events.parquet
+  users_file: data/kion/interim/users.parquet
+  items_file: data/kion/interim/items.parquet
+  artists_file: data/kion/interim/item_artists.parquet
+split:
+  test_days: 7
+  val_days: 7
+  gap_days: 7
+  train_snapshot_weeks: 4
+  label_horizon_days: 7
+candidates:
+  max_positives_per_user: 50
+  negatives_per_positive_train: 10
+  negatives_per_positive_eval: 30
+  negative_pool_size: 5000
+  min_item_popularity: 3
+features:
+  windows_days:
+  - 1
+  - 7
+  - 30
+  - 90
+  - 365
+  all_time_window: null
+model:
+  type: lightgbm
+  params:
+    objective: binary
+    metric: auc
+    learning_rate: 0.05
+    num_leaves: 63
+    min_data_in_leaf: 100
+    feature_fraction: 0.8
+    bagging_fraction: 0.8
+    bagging_freq: 1
+    lambda_l2: 1.0
+    num_threads: 16
+    verbosity: -1
+  num_boost_rounds: 2000
+  early_stopping_rounds: 100
+eval:
+  ks:
+  - 5
+  - 10
+  - 20
+agent:
+  provider: openrouter
+  model: qwen/qwen3.8-omni-flash
+  temperature: 0.2
+  max_tokens: 1500
+  max_iterations: 12
+  batch_size: 8
+  sample_users: 200
+  min_user_auc_gain: 0.015
+  max_specs_per_call: 12
+  max_per_entity_metric: 3
+  max_requests: 60
+  price_in_per_mtok: 0.15
+  price_out_per_mtok: 0.47

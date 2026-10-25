@@ -1,0 +1,4 @@
+variant,n_features_flat,n_features_expr,val_flat,val_expr,delta_val,test_flat,test_expr,delta_test
+auto_base,57,77,0.7752,0.8299,0.0547,,,
+auto_rel,104,124,0.8956,0.8991,0.0036,,,
+manual_plus_auto,203,223,0.919,0.9183,-0.0006,0.9185,0.9187,0.0002

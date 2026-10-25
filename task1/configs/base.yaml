@@ -1,0 +1,93 @@
+project:
+  name: recsys-auto-features
+  seed: 42
+
+paths:
+  raw: data/raw
+  interim: data/interim
+  processed: data/processed
+  experiments: experiments
+  reports: reports
+
+data:
+  # Main dataset: yambda (Yandex Music). KION is downloaded for comparison only.
+  dataset: yambda
+  yambda:
+    size: 500m
+    raw_file: data/raw/yambda/flat/500m/multi_event.parquet
+    artist_map: data/raw/yambda/artist_item_mapping.parquet
+    album_map: data/raw/yambda/album_item_mapping.parquet
+    n_users: 10000          # how many users to keep (all their history is preserved)
+    min_user_events: 20     # drop nearly-empty users
+  kion:
+    raw_dir: data/raw/kion
+
+prepare:
+  events_file: data/interim/events.parquet
+  users_file: data/interim/users.parquet
+  items_file: data/interim/items.parquet
+  artists_file: data/interim/item_artists.parquet
+
+split:
+  # Global time split. Timestamps are relative (Yambda: 5-second bins from an
+  # undisclosed origin), so boundaries are expressed in days before the end of
+  # the observed period.
+  test_days: 7
+  val_days: 7
+  gap_days: 7
+  # Training snapshots: the label horizon is 7 days; make one snapshot per week.
+  train_snapshot_weeks: 4
+  label_horizon_days: 7
+
+candidates:
+  max_positives_per_user: 50
+  negatives_per_positive_train: 10
+  negatives_per_positive_eval: 30
+  # negatives are sampled from the top-N most popular items seen in history
+  negative_pool_size: 50000
+  min_item_popularity: 5
+
+features:
+  windows_days: [1, 7, 30, 90, 365]
+  all_time_window: null
+
+model:
+  type: lightgbm
+  params:
+    objective: binary
+    metric: auc
+    learning_rate: 0.05
+    num_leaves: 63
+    min_data_in_leaf: 100
+    feature_fraction: 0.8
+    bagging_fraction: 0.8
+    bagging_freq: 1
+    lambda_l2: 1.0
+    num_threads: 16
+    verbosity: -1
+  num_boost_rounds: 2000
+  early_stopping_rounds: 100
+
+eval:
+  ks: [5, 10, 20]
+
+# LLM-агент, предлагающий признаки в рамках DSL. Ключ берётся из .env
+# (OPENROUTER_API_KEY); в конфиг попадает только имя модели и бюджет.
+agent:
+  provider: openrouter
+  model: qwen/qwen3.8-omni-flash
+  temperature: 0.2
+  max_tokens: 1500
+  max_iterations: 12
+  batch_size: 8
+  sample_users: 200
+  # порог по |AUC - 0.5| внутри пользователя, ниже которого кандидат не попадает в пул
+  min_user_auc_gain: 0.015
+  # сколько признаков максимум принимается за один вызов propose_specs
+  max_specs_per_call: 12
+  # не больше N принятых признаков на одну пару (entity, metric) — защита от
+  # вырождения пула в длинные окна user_artist/user_album
+  max_per_entity_metric: 3
+  max_requests: 60
+  price_in_per_mtok: 0.15
+  price_out_per_mtok: 0.47

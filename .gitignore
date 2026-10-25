@@ -1,0 +1,31 @@
+# Python / environment
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+*.egg-info/
+.env
+
+# Data: raw/interim/processed are reproducible and too large for git
+data/raw/
+data/interim/
+data/processed/
+task1/data/**/raw/
+task1/data/**/interim/
+task1/data/**/processed/
+task2/data/raw/
+task2/data/processed/
+task2/data/processed_split150/
+
+# Experiment artifacts: checkpoints, predictions, logs
+experiments/
+experiments_holdout/
+experiments_kion/
+!task1/experiments/
+task1/experiments/*
+!task1/experiments/.gitkeep
+task1/experiments_holdout/
+task1/experiments_kion/
+task2/experiments/
+*.log

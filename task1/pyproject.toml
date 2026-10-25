@@ -1,0 +1,41 @@
+[project]
+name = "recsys-auto-features"
+version = "0.1.0"
+description = "Research project: automated feature engineering for recommender systems (T-Bank task 1)"
+requires-python = ">=3.11"
+dependencies = [
+    "pandas>=2.2",
+    "polars>=1.0",
+    "pyarrow>=17",
+    "duckdb>=1.1",
+    "numpy>=1.26",
+    "scikit-learn>=1.4",
+    "lightgbm>=4.5",
+    "xgboost>=2.1",
+    "catboost>=1.2",
+    "pyyaml>=6.0",
+    "tqdm>=4.66",
+    "matplotlib>=3.8",
+    "seaborn>=0.13",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "jupyter>=1.0", "ipykernel>=6.29"]
+agent = [
+    "litellm>=1.52",
+    "mcp>=1.0",
+    "pydantic>=2.8",
+    "jsonschema>=4.23",
+    "python-dotenv>=1.0",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

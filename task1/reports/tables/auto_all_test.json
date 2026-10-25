@@ -1,0 +1,21 @@
+{
+  "model_dir": "/ssd/projects/tbank/research/task1/experiments/auto_search/quota/models/auto_all",
+  "split": "test",
+  "n_features": 187,
+  "metrics": {
+    "roc_auc": 0.9674504248131595,
+    "log_loss": 0.057147385197170934,
+    "ndcg@5": 0.9348461460758033,
+    "recall@5": 0.2902697261270523,
+    "map@5": 0.9642554533982334,
+    "ndcg@10": 0.9139158572787196,
+    "recall@10": 0.43766720760032235,
+    "map@10": 0.9470630420507444,
+    "ndcg@20": 0.885370608612878,
+    "recall@20": 0.6122994350854589,
+    "map@20": 0.9218761202595797,
+    "n_users": 5547,
+    "avg_candidates": 909.7636560302866,
+    "avg_positives": 29.34721471065441
+  }
+}
